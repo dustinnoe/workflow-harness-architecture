@@ -1,7 +1,7 @@
 # AI Workflow Harness Architecture Specification
 
 **Specification ID:** `AI-HARNESS-ARCH`  
-**Version:** `2.0.0`  
+**Version:** `1.0.0`  
 **Status:** Runtime-neutral baseline  
 **Runtime:** implementation-defined  
 **Language:** implementation-defined
@@ -58,7 +58,7 @@ A **Graph** is a logical workflow component with an explicit contract and define
 
 ## 3. Architectural invariants
 
-**A01 — retired.** Version 1 selected LangGraph as the mandatory runtime. Version 2 is runtime-neutral.
+**A01.** Workflow architecture semantics MUST remain runtime- and language-independent. Framework-specific mappings belong in runtime profiles and MUST NOT redefine the core architecture.
 
 **A02.** Model/provider selection and parameters MUST come from configuration. Models are configuration concerns, not a separate architectural layer.
 
@@ -98,11 +98,11 @@ A **Graph** is a logical workflow component with an explicit contract and define
 
 **A20.** New graph categories or changes to these boundaries require an explicit architecture decision.
 
-**A21.** Workflow semantics MUST remain independent of the selected execution runtime.
+**A21.** A deployment MUST explicitly declare which runtime capabilities and durability guarantees it actually provides.
 
-**A22.** A deployment MUST explicitly declare which runtime capabilities and durability guarantees it actually provides.
+**A22.** Runtime-native features MUST NOT weaken harness restrictions or expose private graph state across stack boundaries.
 
-**A23.** Runtime-native features MUST NOT weaken harness restrictions or expose private graph state across stack boundaries.
+**A23.** Public values crossing language or process boundaries MUST preserve their declared semantics through validated, versioned encodings; runtime-native execution objects MUST NOT become public domain contracts.
 
 ## 4. Graph responsibilities
 
@@ -268,7 +268,7 @@ Configuration MUST NOT widen architectural permissions. For example, configurati
 
 ## 10. Runtime contract
 
-The harness architecture does not prescribe LangGraph, Temporal, DBOS, Restate, Mastra, XState, or a custom runtime. A runtime is conforming when it preserves this specification and explicitly declares its supported execution capabilities.
+The harness architecture does not prescribe a specific graph framework, durable workflow engine, state-machine library, programming stack, or custom runtime. A runtime is conforming when it preserves this specification and explicitly declares its supported execution capabilities.
 
 ### Required baseline runtime capabilities
 
@@ -410,9 +410,7 @@ A runtime profile maps this architecture onto a concrete stack and records:
 
 Profiles may impose narrower implementation rules but MUST NOT relax the core architecture.
 
-Available profile:
-
-- [TypeScript / LangGraph](runtime-profiles/LANGGRAPH_TYPESCRIPT.md)
+Runtime profiles are maintained as separate documents. A profile is added when a concrete stack is adopted or formally evaluated for adoption.
 
 A repository adopting a profile SHOULD record the exact dependency versions, persistence backend, runtime capabilities, verified conformance level, and fault-test evidence.
 

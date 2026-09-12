@@ -2,7 +2,7 @@
 
 **Profile ID:** `RUNTIME-LANGGRAPH-TS`  
 **Profile Version:** `1.0.0`  
-**Core Specification:** `AI-HARNESS-ARCH 2.0.0`  
+**Core Specification:** `AI-HARNESS-ARCH 1.0.0`  
 **Language:** TypeScript / JavaScript  
 **Runtime Framework:** LangGraph
 
