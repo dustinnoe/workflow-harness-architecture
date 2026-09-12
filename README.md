@@ -2,7 +2,7 @@
 
 A runtime- and language-independent architecture for building model-driven and deterministic AI workflows with clear responsibility, state, capability, and effect boundaries.
 
-![Workflow Harness Architecture](assets/workflow-harness-architecture.svg)
+![Workflow Harness Architecture](assets/workflow-harness-architecture.png)
 
 ## Core model
 
