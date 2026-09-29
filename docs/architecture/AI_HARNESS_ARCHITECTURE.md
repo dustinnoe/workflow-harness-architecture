@@ -352,11 +352,24 @@ Delegation MUST preserve overall limits rather than grant every child a fresh un
 
 ### Observability
 
-Execution records SHOULD correlate execution identity, graph/node identity, model/provider identity, tool calls, outcomes, and artifact references.
+The Observation Layer SHOULD collect and retain enough information about each workflow execution to completely reconstruct its execution history, debug errors, and identify improvements in correctness, reliability, efficiency, and output quality.
+
+Execution records SHOULD correlate:
+
+- workflow, run, and attempt identities, parent/child relationships, and logical operation identities,
+- graph/node, model/provider, and tool identities, with relevant code, configuration, and contract versions,
+- relevant inputs and outputs, including model requests/responses, routing decisions, and state transitions, captured under the privacy rules below or referenced through retained evidence artifacts,
+- tool calls, declared effects, authorization decisions, affected resources, outcomes, and artifact/version references,
+- errors and their execution context, retries, timeouts, cancellations, and recovery events, preserving partial completion and unknown effect outcomes,
+- timestamps, causal ordering, durations, and available resource usage and cost information.
+
+Together, these records SHOULD make it possible to trace a result or failure back through the operations and evidence that produced it, locate the failure and its cause, and identify bottlenecks, repeated work, unnecessary calls, and opportunities to improve workflow behavior. Historical reconstruction depends on retained evidence; deterministic replay remains subject to the runtime's separately declared guarantees.
 
 Privileged domain actions require audit evidence of authorization, affected resource, operation identity, and known result.
 
 Observability MUST NOT make private graph state, secrets, or unrestricted prompts available to ordinary callers.
+
+Capture and retention SHOULD use redaction and access-controlled evidence or artifact references where needed. Gaps caused by redaction, sampling, retention limits, or lost records SHOULD be explicit so that an incomplete execution history is recognizable.
 
 ### Memory and caching
 

@@ -207,6 +207,8 @@ Publishing an artifact to a business repository is a Task Graph `write`; storing
 
 Observation MAY use LangSmith, Langfuse, OpenTelemetry, custom logs, or another configured backend.
 
+Instrumentation SHOULD fulfill the core specification's reconstruction, debugging, and improvement goals by preserving a correlated execution history across graph/subgraph calls, node execution, model and tool calls, retries, and supported interrupt/resume or recovery boundaries. Relevant inputs, outputs, decisions, errors, versions, and retained evidence references SHOULD be captured under the privacy rules below.
+
 Instrumentation SHOULD correlate:
 
 - workflow/thread/run identity,
